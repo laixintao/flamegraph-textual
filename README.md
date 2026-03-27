@@ -73,12 +73,48 @@ from flamegraph_textual import FlameGraphView
 
 profile_text = Path("stacks.txt").read_text(encoding="utf-8")
 widget = FlameGraphView(profile_text, filename="stacks.txt")
+
+# Optional: skip auto-detection when you already know the format
+widget = FlameGraphView(
+    profile_text,
+    filename="stacks.txt",
+    profile_type="stackcollapse",
+)
+```
+
+For Austin collapsed text, use the same parser explicitly:
+
+```python
+from pathlib import Path
+
+from flamegraph_textual import FlameGraphView
+
+austin_text = Path("austin.txt").read_text(encoding="utf-8")
+widget = FlameGraphView(
+    austin_text,
+    filename="austin.txt",
+    profile_type="austin",
+)
 ```
 
 ## Supported Input Formats
 
-- pprof protobuf profiles
-- stackcollapse text
+- `pprof`: pprof protobuf profiles
+- `stackcollapse`: generic collapsed-stack text in FlameGraph format
+- `austin`: Austin collapsed text; parsed with the same stackcollapse parser
+
+### Format Notes
+
+- `pprof`
+  Binary protobuf profiles such as Go `pprof` output. Use this when your input
+  is raw profile bytes.
+- `stackcollapse`
+  Plain text in collapsed-stack format, where each line looks like
+  `frame_a;frame_b;frame_c 10`.
+- `austin`
+  Austin's collapsed text output is stackcollapse-compatible, often with
+  metadata comment lines such as `# austin: ...`, `# interval: ...`, and
+  `# mode: ...`. Those comment lines are ignored by the parser.
 
 The parser selection is automatic through:
 [parse](./flamegraph_textual/parsers/__init__.py)
@@ -120,6 +156,10 @@ Most users should start with:
   for embedding a flamegraph widget in a Textual app
 - [parse](./flamegraph_textual/parsers/__init__.py)
   if you want to parse profile bytes yourself
+
+`parse(...)` and `FlameGraphView(...)` both support an optional
+`profile_type` argument. Supported values are `pprof`, `stackcollapse`, and
+`austin`. If omitted, the library auto-detects the parser as before.
 
 Other public exports:
 

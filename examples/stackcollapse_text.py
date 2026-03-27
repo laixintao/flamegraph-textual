@@ -21,19 +21,27 @@ class StackCollapseDemo(App):
 
     def compose(self) -> ComposeResult:
         profile_text = self.profile_path.read_text(encoding="utf-8")
-        yield FlameGraphView(profile_text, filename=self.profile_path.name)
+        yield FlameGraphView(
+            profile_text,
+            filename=self.profile_path.name,
+            profile_type="stackcollapse",
+        )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Render stackcollapse text with flamegraph_textual."
+        description=(
+            "Render stackcollapse-compatible text "
+            "(including Austin collapsed output) with flamegraph_textual."
+        )
     )
     parser.add_argument(
         "path",
         nargs="?",
         type=Path,
         help=(
-            "Optional path to stackcollapse text. Defaults to bundled sample."
+            "Optional path to stackcollapse-compatible text. "
+            "Defaults to bundled sample."
         ),
     )
     parser.add_argument(

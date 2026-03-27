@@ -40,12 +40,17 @@ class FlameGraphView(Widget):
         self,
         profile_text: Union[bytes, str],
         filename: str = "profile",
+        profile_type: str | None = None,
         sample_index: int | None = None,
         *args,
         **kwargs,
     ) -> None:
         super().__init__(*args, **kwargs)
-        self.profile = self._parse_profile(profile_text, filename)
+        self.profile = self._parse_profile(
+            profile_text,
+            filename,
+            profile_type=profile_type,
+        )
         self.root_stack = self.profile.root_stack
         self.show_information_screen = False
 
@@ -90,13 +95,16 @@ class FlameGraphView(Widget):
         )
 
     def _parse_profile(
-        self, profile_text: Union[bytes, str], filename: str
+        self,
+        profile_text: Union[bytes, str],
+        filename: str,
+        profile_type: str | None = None,
     ):
         if isinstance(profile_text, str):
             profile_bytes = profile_text.encode("utf-8")
         else:
             profile_bytes = profile_text
-        return parse(profile_bytes, filename)
+        return parse(profile_bytes, filename, profile_type=profile_type)
 
     def compose(self):
         yield self.tabs_widget
