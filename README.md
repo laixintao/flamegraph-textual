@@ -12,8 +12,26 @@ standalone viewer.
 
 ## Install
 
+From PyPI:
+
 ```shell
 pip install flamegraph-textual
+```
+
+From a local checkout:
+
+```shell
+git clone git@github.com:laixintao/flamegraph-textual.git
+cd flamegraph-textual
+pip install -e .
+```
+
+For development with Poetry:
+
+```shell
+git clone git@github.com:laixintao/flamegraph-textual.git
+cd flamegraph-textual
+poetry install
 ```
 
 ## What It Does
