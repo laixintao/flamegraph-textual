@@ -81,14 +81,14 @@ widget = FlameGraphView(profile_text, filename="stacks.txt")
 - stackcollapse text
 
 The parser selection is automatic through:
-[parse](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/parsers/__init__.py)
+[parse](./flamegraph_textual/parsers/__init__.py)
 
 ## Try It Immediately
 
 This repo includes sample profiles under:
 
-- [tests/pprof_data](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/tests/pprof_data)
-- [tests/stackcollapse_data](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/tests/stackcollapse_data)
+- [tests/pprof_data](./tests/pprof_data)
+- [tests/stackcollapse_data](./tests/stackcollapse_data)
 
 Run the bundled examples with no setup:
 
@@ -112,13 +112,13 @@ python examples/stackcollapse_text.py /path/to/stacks.txt
 ## Main API
 
 The public exports are defined in:
-[__init__.py](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/__init__.py)
+[__init__.py](./flamegraph_textual/__init__.py)
 
 Most users should start with:
 
-- [FlameGraphView](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/view.py)
+- [FlameGraphView](./flamegraph_textual/view.py)
   for embedding a flamegraph widget in a Textual app
-- [parse](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/parsers/__init__.py)
+- [parse](./flamegraph_textual/parsers/__init__.py)
   if you want to parse profile bytes yourself
 
 Other public exports:
@@ -149,10 +149,10 @@ Inside the widget:
 ## Regenerate Protobuf Bindings
 
 The canonical pprof schema lives in:
-[profile.proto](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/proto/profile.proto)
+[profile.proto](./proto/profile.proto)
 
 The generated Python module lives in:
-[profile_pb2.py](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/parsers/profile_pb2.py)
+[profile_pb2.py](./flamegraph_textual/parsers/profile_pb2.py)
 
 Regenerate it with:
 
