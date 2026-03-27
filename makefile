@@ -7,7 +7,7 @@ proto:
 		--entrypoint protoc \
 		namely/protoc-all \
 		-I=proto \
-		--python_out=flamegraph_textual/pprof_parser \
+		--python_out=flamegraph_textual/parsers \
 		proto/profile.proto
 
 bump_patch:
@@ -25,7 +25,7 @@ _perf_startup:
 	sudo py-spy record python _perf_main.py
 
 run-test:
-	rm -rf htmlcov && pytest --cov-report html --cov=flameshow -vv --disable-warnings
+	rm -rf htmlcov && pytest --cov-report html --cov=flamegraph_textual -vv --disable-warnings
 	flake8 .
 	black .
 	open htmlcov/index.html
