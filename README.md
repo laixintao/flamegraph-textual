@@ -111,21 +111,28 @@ python examples/stackcollapse_text.py /path/to/stacks.txt
 
 ## Main API
 
-Most users only need:
+The public exports are defined in:
+[__init__.py](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/__init__.py)
+
+Most users should start with:
 
 - [FlameGraphView](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/view.py)
+  for embedding a flamegraph widget in a Textual app
 - [parse](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/parsers/__init__.py)
+  if you want to parse profile bytes yourself
 
-Other exports are available if you want lower-level control:
+Other public exports:
 
+- `FlameGraphApp`
+  convenience alias around the full demo-style app
 - `FlameGraph`
+  lower-level rendering widget
 - `FlameGraphScroll`
-- `Frame`
-- `Profile`
-- `SampleType`
-
-See:
-[__init__.py](/Users/xintao.lai/Programs/flameshow-all/flamegraph-textual/flamegraph_textual/__init__.py)
+  scroll container used around the flamegraph widget
+- `Frame`, `Profile`, `SampleType`
+  data model types
+- `FrameMap`, `add_array`
+  lower-level rendering helpers used by the widget
 
 ## Controls
 
