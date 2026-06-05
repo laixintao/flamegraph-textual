@@ -234,7 +234,7 @@ class FrameStatAll(Widget):
 
     @property
     def frame_all_self_value(self):
-        frames_same_name = self.name_to_frame[self.frame.name]
+        frames_same_name = self.name_to_frame.get(self.frame.name, [self.frame])
         total_value = 0
         i = self.sample_index
         for instance in frames_same_name:
@@ -257,7 +257,7 @@ class FrameStatAll(Widget):
 
     @property
     def frame_all_total_value(self):
-        frames_same_name = self.name_to_frame[self.frame.name]
+        frames_same_name = self.name_to_frame.get(self.frame.name, [self.frame])
         total_value = sum(
             f.values[self.sample_index] for f in frames_same_name
         )

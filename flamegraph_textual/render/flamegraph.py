@@ -119,8 +119,11 @@ class FlameGraph(Widget, can_focus=True):
         def _generate_for_children(frame):
             # generate for children
             my_maps = frame_maps[frame._id]
+            visible_children: set[int] = set()
             for sample_i, my_map in enumerate(my_maps):
                 parent_width = my_map.width
+                if parent_width <= 0:
+                    continue
                 if frame.values[sample_i] <= 0:
                     child_widthes = [0.0 for _ in frame.children]
                 else:
@@ -144,16 +147,20 @@ class FlameGraph(Widget, can_focus=True):
                 offset = my_map.offset
                 for index, child in enumerate(frame.children):
                     child_width = int(rounded_child_widthes[index])
+                    if child_width <= 0:
+                        continue
                     frame_maps.setdefault(child._id, []).append(
                         FrameMap(
                             offset=offset,
                             width=child_width,
                         )
                     )
+                    visible_children.add(child._id)
                     offset += child_width
 
             for child in frame.children:
-                _generate_for_children(child)
+                if child._id in visible_children:
+                    _generate_for_children(child)
 
         _generate_for_children(current_focused_stack)
         t2 = time.time()

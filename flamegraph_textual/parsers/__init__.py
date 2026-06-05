@@ -1,17 +1,21 @@
 import logging
 
 from flamegraph_textual.exceptions import ProfileParseException
+from flamegraph_textual.parsers.google_trace_parser import GoogleTraceParser
 from flamegraph_textual.parsers.pprof_parser import ProfileParser as PprofParser
+from flamegraph_textual.parsers.speedscope_parser import SpeedscopeParser
 from flamegraph_textual.parsers.stackcollapse_parser import StackCollapseParser
 
 logger = logging.getLogger(__name__)
 
 
-ALL_PARSERS = [PprofParser, StackCollapseParser]
+ALL_PARSERS = [PprofParser, SpeedscopeParser, GoogleTraceParser, StackCollapseParser]
 PARSERS_BY_TYPE = {
     "pprof": PprofParser,
     "stackcollapse": StackCollapseParser,
     "austin": StackCollapseParser,
+    "speedscope": SpeedscopeParser,
+    "google-trace": GoogleTraceParser,
 }
 
 

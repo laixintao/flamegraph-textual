@@ -211,3 +211,14 @@ Run tests with:
 ```shell
 pytest -q
 ```
+
+## Changelog
+
+### Unreleased
+
+- Added speedscope format parser (`SpeedscopeParser`) supporting both `evented`
+  and `sampled` profile types.
+- Added Google Trace Event format parser (`GoogleTraceParser`).
+- `parse()` and `FlameGraphView` now accept an optional `profile_type` keyword
+  argument (`"pprof"`, `"stackcollapse"`, `"austin"`, `"speedscope"`,
+  `"google_trace"`) to skip auto-detection.

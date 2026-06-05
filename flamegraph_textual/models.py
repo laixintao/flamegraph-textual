@@ -150,6 +150,9 @@ class Profile:
     name_aggr: Dict[str, List[Frame]] = field(init=False)
 
     def __post_init__(self):
+        self.refresh()
+
+    def refresh(self, include_name_aggr: bool = True):
         """
         init_lines must be called before render
         """
@@ -183,7 +186,10 @@ class Profile:
         self.lines = lines
         self.frameid_to_lineno = frameid_to_lineno
 
-        self.name_aggr = self.get_name_aggr(self.root_stack)
+        if include_name_aggr:
+            self.name_aggr = self.get_name_aggr(self.root_stack)
+        elif not hasattr(self, "name_aggr"):
+            self.name_aggr = {}
 
     def get_name_aggr(
         self, start_frame: Frame, names: Set[str] | None = None
