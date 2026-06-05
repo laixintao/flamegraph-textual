@@ -147,14 +147,14 @@ class FlameGraph(Widget, can_focus=True):
                 offset = my_map.offset
                 for index, child in enumerate(frame.children):
                     child_width = int(rounded_child_widthes[index])
-                    if child_width <= 0:
-                        continue
                     frame_maps.setdefault(child._id, []).append(
                         FrameMap(
                             offset=offset,
                             width=child_width,
                         )
                     )
+                    if child_width <= 0:
+                        continue
                     visible_children.add(child._id)
                     offset += child_width
 
