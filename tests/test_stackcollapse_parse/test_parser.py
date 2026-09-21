@@ -71,6 +71,39 @@ def test_validate_simple_text_contains_empty(simple_collapse_data):
     assert StackCollapseParser.validate(data)
 
 
+def test_validate_lf_only_text_data():
+    data = b"a;b;c 10\na;b;d 4\n"
+    assert StackCollapseParser.validate(data)
+
+
+def test_parse_lf_only_text_data():
+    data = b"a;b;c 10\na;b;d 4\n"
+    profile = StackCollapseParser("a.txt").parse(data)
+    assert frame2json(profile.root_stack) == {
+        "root": {
+            "children": [
+                {
+                    "a": {
+                        "children": [
+                            {
+                                "b": {
+                                    "children": [
+                                        {"c": {"children": [], "values": [10]}},
+                                        {"d": {"children": [], "values": [4]}},
+                                    ],
+                                    "values": [14],
+                                }
+                            }
+                        ],
+                        "values": [14],
+                    }
+                }
+            ],
+            "values": [14],
+        }
+    }
+
+
 def test_validate_simple_text_data_contains_numbers_somtimes():
     data = b"""
 a;b;c 10

@@ -1,5 +1,4 @@
 import logging
-import os
 import re
 from typing import Dict
 
@@ -39,7 +38,7 @@ class StackCollapseParser:
 
     def parse(self, text_data):
         text_data = text_data.decode()
-        lines = text_data.split(os.linesep)
+        lines = text_data.splitlines()
         for line in lines:
             self.parse_line(line)
 
@@ -110,7 +109,7 @@ class StackCollapseParser:
             return False
 
         # only validate the first 100 lines
-        lines = to_check.split(os.linesep)
+        lines = to_check.splitlines()
         to_validate_lines = [
             line.strip() for line in lines[:100] if line.strip()
         ]
